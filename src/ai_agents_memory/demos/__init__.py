@@ -6,7 +6,9 @@ __all__ = [
     "run_fact_extraction_demo",
     "run_reflection_demo",
     "run_semantic_store_demo",
+    "create_short_term_agent",
     "run_short_term_demo",
+    "run_short_term_turn",
     "run_summarization_demo",
     "run_vector_recall_demo",
     "sliding_window",
@@ -26,12 +28,25 @@ def __getattr__(name: str):
         from ai_agents_memory.demos.semantic_store import run_semantic_store_demo
 
         return run_semantic_store_demo
-    if name in {"run_short_term_demo", "sliding_window"}:
-        from ai_agents_memory.demos.short_term import run_short_term_demo, sliding_window
+    if name in {
+        "create_short_term_agent",
+        "run_short_term_demo",
+        "run_short_term_turn",
+        "sliding_window",
+    }:
+        from ai_agents_memory.demos.short_term import (
+            create_short_term_agent,
+            run_short_term_demo,
+            run_short_term_turn,
+            sliding_window,
+        )
 
-        return {"run_short_term_demo": run_short_term_demo, "sliding_window": sliding_window}[
-            name
-        ]
+        return {
+            "create_short_term_agent": create_short_term_agent,
+            "run_short_term_demo": run_short_term_demo,
+            "run_short_term_turn": run_short_term_turn,
+            "sliding_window": sliding_window,
+        }[name]
     if name == "run_summarization_demo":
         from ai_agents_memory.demos.summarization import run_summarization_demo
 

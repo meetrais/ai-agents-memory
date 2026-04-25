@@ -25,7 +25,8 @@ def test_short_term_demo_calls_openai():
     result = run_short_term_demo(_settings_or_skip())
 
     assert result.output
-    assert result.technique == "Sliding window"
+    assert result.technique == "LangGraph checkpointed thread state"
+    assert "Maya" in result.output or "concise" in result.output
 
 
 def test_summarization_demo_calls_openai():

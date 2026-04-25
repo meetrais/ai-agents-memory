@@ -5,6 +5,7 @@ from __future__ import annotations
 import os
 from pathlib import Path
 
+from dotenv import load_dotenv
 from pydantic import BaseModel, Field
 
 
@@ -28,6 +29,7 @@ class MemorySettings(BaseModel):
     def from_env(cls, require_api_key: bool = True) -> "MemorySettings":
         """Create settings from environment variables."""
 
+        load_dotenv(dotenv_path=Path.cwd() / ".env")
         api_key = os.getenv("OPENAI_API_KEY", "")
         if require_api_key and not api_key:
             raise MissingOpenAIKeyError(

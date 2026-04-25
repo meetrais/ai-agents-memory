@@ -46,7 +46,7 @@ memory-samples all
 
 | Command | Technique | Duration | Cognitive function | Storage shape |
 | --- | --- | --- | --- | --- |
-| `short-term` | Sliding window | Short-term | Working memory | Recent messages |
+| `short-term` | LangGraph checkpointed thread state | Short-term | Working memory | Thread messages |
 | `summarize` | Running summary | Hybrid | Working + semantic | Summary text |
 | `semantic-store` | Store-backed tool recall | Long-term | Preference/semantic | JSON document |
 | `vector-recall` | Embeddings + semantic retrieval | Long-term | Episodic/semantic | Vector chunks |
@@ -66,3 +66,16 @@ This first pass keeps the examples concise and educational. It does not include
 full MemGPT-style paging, dynamic MCP/tool eviction, subgoal working memory, or
 production knowledge graph storage. Those are natural extension points once the
 core sample shape is useful.
+
+## Short-Term Chat
+
+`memory-samples short-term` opens an interactive chat. The agent retains messages
+inside the current process by using a LangGraph checkpointer and a `thread_id`.
+
+```powershell
+memory-samples short-term --thread-id demo
+```
+
+Type `quit`, `exit`, or `:q` to stop. `InMemorySaver` is intentionally used for
+the sample; use a database-backed checkpointer when the same thread must survive
+separate CLI runs or application restarts.
